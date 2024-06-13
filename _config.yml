@@ -1,5 +1,3 @@
-title: My Data Science Portfolio
-#logo: /assets/img/headshot_circle.png
+title: Data science dummy project
 #description: text below image
-show_downloads: true
-theme: Midnight
+theme: jekyll-theme-minimal
