@@ -8,8 +8,8 @@ The goal of this project is to group Spotify songs into clusters based on their 
 ## The Dataset
 This dataset was obtained from Kaggle at: [Kaggle](https://www.kaggle.com/datasets/joebeachcapital/30000-spotify-songs/data). 
 The dataset contains the following columns:
-- TRACK_ID: Song ID
-- TRACK_NAME: Song Name
+- `TRACK_ID`: Song ID
+- `TRACK_NAME`: Song Name
 - `TRACK_ARTIST`: Song Artist
 - `TRACK_POPULARITY`: Song Popularity With a Rating of 0-100 Where a Higher Rating is Better
 - `TRACK_ALBUM_ID`: Album ID
@@ -37,7 +37,8 @@ The dataset contains the following columns:
 write a project summary here.
 
 ## Data Preprocessing
-The file was extracted from Kaggle and loaded into our data warehouse, Exasol, using Talend. Once the dataset was loaded into the data warehouse, I connected directly to Exasol in Spyder, my Python IDE. I then created a dataframe, `df`, with my table `SPOTIFY_SONGS`.
+### Loading the Data
+The file was extracted from Kaggle and loaded into our data warehouse, Exasol. Using Spyder, I then connected to Exasol and imported the dataset into a dataframe. 
 ```
 # connecting to exasol
 # Import system Module
@@ -49,4 +50,16 @@ sys.path.insert(0, r"\\UUG.VCM.CC\Wholesale\Insight_and_Analytics\Code Sharing")
 # Import connection functions (homemade functions to connect to databases etc)
 import uu_connection_functions as uudcf
 df = uudcf.df_from_odbc(dsn="Exasol dev", sql_query="select * from LOAD_REFERENCE.SPOTIFY_SONGS")
+```
+### Null Removal and Deduplication
+Firstly, the dataset was checked for any null or duplicate values. No null or duplicate rows were found.
+```
+# data cleansing and transformation
+# check for null values
+df.isna().sum().sort_values(ascending=False)
+# no null values so no cleansing needed yet
+
+# check for duplicate rows 
+df.duplicated().any()
+# no duplicate rows
 ```
