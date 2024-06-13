@@ -36,4 +36,17 @@ The dataset contains the following columns:
 ## Executive Summary
 write a project summary here.
 
+## Data Preprocessing
+The file was extracted from Kaggle and loaded into our data warehouse, Exasol, using Talend. Once the dataset was loaded into the data warehouse, I connected directly to Exasol in Spyder, my Python IDE. 
+'''
+# connecting to exasol
+# Import system Module
+import sys
 
+# Append Code Sharing to SYS path
+sys.path.insert(0, r"\\UUG.VCM.CC\Wholesale\Insight_and_Analytics\Code Sharing")
+
+# Import connection functions (homemade functions to connect to databases etc)
+import uu_connection_functions as uudcf
+df = uudcf.df_from_odbc(dsn="Exasol dev", sql_query="select * from LOAD_REFERENCE.SPOTIFY_SONGS")
+'''
