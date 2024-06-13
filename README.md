@@ -6,7 +6,7 @@ insert a table of contents here
 The goal of this project is to group Spotify songs into clusters based on their various characteristics using K-Means clustering. An algorithm such as this can be used to create a song recommendation system for Spotify users by recommending songs within the same cluster. 
 
 ## The Dataset
-This dataset was obtained from Kaggle at: [Kaggle](https://www.kaggle.com/datasets/joebeachcapital/30000-spotify-songs/data) 
+This dataset was obtained from Kaggle at: [Kaggle](https://www.kaggle.com/datasets/joebeachcapital/30000-spotify-songs/data). 
 The dataset contains the following columns:
 - TRACK_ID: Song ID
 - TRACK_NAME: Song Name
