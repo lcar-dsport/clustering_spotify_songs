@@ -3,7 +3,8 @@
 ## Table of Contents
 1. [Problem Statement](https://github.com/lcar-dsport/clustering_spotify_songs/blob/main/README.md#problem-statement)
 2. [The Dataset](https://github.com/lcar-dsport/clustering_spotify_songs/blob/main/README.md#the-dataset)
-3. [Executive Summary]
+3. [Executive Summary](https://github.com/lcar-dsport/clustering_spotify_songs/blob/main/README.md#executive-summary)
+4. [Data Preprocessing]
 
 ## Problem Statement
 The goal of this project is to group Spotify songs into clusters based on their various characteristics using K-Means clustering. An algorithm such as this can be used to create a song recommendation system for Spotify users by recommending songs within the same cluster. 
