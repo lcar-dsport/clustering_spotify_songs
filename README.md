@@ -1,5 +1,5 @@
 # Segmenting Spotify Songs with K-Means Clustering
-![image](images/images/Spotify)
+![image](images/images/Spotify Logo.png)
 ## Table of Contents
 insert a table of contents here
 
