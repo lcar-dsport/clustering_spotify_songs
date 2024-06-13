@@ -64,3 +64,5 @@ df.isna().sum().sort_values(ascending=False)
 df.duplicated().any()
 # no duplicate rows
 ```
+### Feature Selection
+The relevant columns for the clustering algorithm were selected and all other columns were dropped. This was then imported into a new dataframe, `spotify_songs`. 
