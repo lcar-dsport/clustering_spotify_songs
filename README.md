@@ -8,8 +8,8 @@ The goal of this project is to group Spotify songs into clusters based on their 
 ## The Dataset
 This dataset was obtained from Kaggle at: [Kaggle](https://www.kaggle.com/datasets/joebeachcapital/30000-spotify-songs/data) 
 The dataset contains the following columns:
-'TRACK_ID': Song ID
-'TRACK_NAME': Song Name
+- 'TRACK_ID': Song ID
+- 'TRACK_NAME': Song Name
 'TRACK_ARTIST': Song Artist
 'TRACK_POPULARITY': Song Popularity With a Rating of 0-100 Where a Higher Rating is Better
 'TRACK_ALBUM_ID': Album ID
