@@ -37,7 +37,7 @@ The dataset contains the following columns:
 write a project summary here.
 
 ## Data Preprocessing
-The file was extracted from Kaggle and loaded into our data warehouse, Exasol, using Talend. Once the dataset was loaded into the data warehouse, I connected directly to Exasol in Spyder, my Python IDE. 
+The file was extracted from Kaggle and loaded into our data warehouse, Exasol, using Talend. Once the dataset was loaded into the data warehouse, I connected directly to Exasol in Spyder, my Python IDE. I then created a dataframe, `df`, with my table `SPOTIFY_SONGS`.
 ```
 # connecting to exasol
 # Import system Module
