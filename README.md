@@ -44,8 +44,16 @@ This project aimed to investigate whether K-Means clustering can be used to grou
 ### Loading the Data
 The file was extracted from Kaggle and loaded into our data warehouse, Exasol. I then connected to the table in Exasol using Jupyter notebooks. 
 
-### Null Removal and Deduplication
-Firstly, the dataset was checked for any null or duplicate values. No null or duplicate rows were found.
+### Data cleansing
+As I was not interested in the playlist data, I dropped any playlist columns.
+```
+df = df.drop(columns = ['PLAYLIST_NAME','PLAYLIST_ID','PLAYLIST_GENRE','PLAYLIST_SUBGENRE']).copy()
+```
+I then dropped any duplicate values.
+```
+df = df.drop_duplicates().copy()
+```
+
 ```
 # data cleansing and transformation
 # check for null values
