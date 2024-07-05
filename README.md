@@ -1,4 +1,4 @@
-# Segmenting Spotify Songs with K-Means Clustering
+# Can K-Means clustering be utilized to group Spotify songs based on the audio features valence and tempo?
 ![image](images/images/Spotify_Logo.png)
 ## Table of Contents
 1. [Problem Statement](https://github.com/lcar-dsport/clustering_spotify_songs/blob/main/README.md#problem-statement)
@@ -7,7 +7,7 @@
 4. [Data Preprocessing](https://github.com/lcar-dsport/clustering_spotify_songs/blob/main/README.md#data-preprocessing)
 
 ## Problem Statement
-The goal of this project is to group Spotify songs into clusters based on their various characteristics using K-Means clustering. An algorithm such as this can be used to create a song recommendation system for Spotify users by recommending songs within the same cluster. 
+The goal of this project is to group Spotify songs into clusters based on the audio features tempo and valence using K-Means clustering. An algorithm such as this could be used to create a song recommendation system for Spotify users by recommending songs within the same cluster. 
 
 ## The Dataset
 This dataset was obtained from Kaggle at: [Kaggle](https://www.kaggle.com/datasets/joebeachcapital/30000-spotify-songs/data). 
@@ -38,23 +38,12 @@ The dataset contains the following columns:
 
 
 ## Executive Summary
-write a project summary here.
+This project aimed to investigate whether K-Means clustering can be used to group Spotify songs based on the audio features valence and tempo. This project offers a potential starting point for the development of a future song recommendation system for Spotify users. Due to time constraints and cost/run-time restrictions faced in this project, only two audio features were included in the analysis. Future projects with fewer restrictions should explore whether K-Means clustering can be used to group songs based on all the available audio features for the best and most accurate results.
 
 ## Data Preprocessing
 ### Loading the Data
-The file was extracted from Kaggle and loaded into our data warehouse, Exasol. Using Spyder, I then connected to Exasol and imported the dataset into a dataframe. 
-```
-# connecting to exasol
-# Import system Module
-import sys
+The file was extracted from Kaggle and loaded into our data warehouse, Exasol. I then connected to the table in Exasol using Jupyter notebooks. 
 
-# Append Code Sharing to SYS path
-sys.path.insert(0, r"\\UUG.VCM.CC\Wholesale\Insight_and_Analytics\Code Sharing")
-
-# Import connection functions (homemade functions to connect to databases etc)
-import uu_connection_functions as uudcf
-df = uudcf.df_from_odbc(dsn="Exasol dev", sql_query="select * from LOAD_REFERENCE.SPOTIFY_SONGS")
-```
 ### Null Removal and Deduplication
 Firstly, the dataset was checked for any null or duplicate values. No null or duplicate rows were found.
 ```
