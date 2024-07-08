@@ -55,7 +55,7 @@ Finally, I checked for missing values in the dataset to ensure data integrity an
 ```
 df.isna().sum().sort_values(ascending=False)
 ```
-![image](images/images/screenshot_1.png)
+![image](images/images/screenshot_1.PNG)
 
 There were no missing values in the DataFrame.
 
