@@ -68,14 +68,14 @@ features = df[['TRACK_POPULARITY','KEY','LOUDNESS','SPEECHINESS','ACOUSTICNESS',
 ## 4. Data Exploration
 I conducted Exploratory Data Analysis on the `features` DataFrame to explore these variables in depth. Using the `describe()` function, I got some descriptive statistics.
 
-screenshot here
+![image](images/images/screenshot_2.PNG)
 
 This shows some important values such as the number of rows in the DataFrame, the average of each variable, and the standard deviation. To explore the variables further I created box plots and histograms for each variable.
 
 ### Box Plots
-screenshot here
+![image](images/images/screenshot_3.PNG)
 These plots show that some variables, such as `SPEECHINESS` and `INSTRUMENTALNESS`, have a large amount of outliers. Meanwhile, variables such as `LOUDNESS` and `ACOUSTICNESS`, are not normally distributed. 
 
 ### Histograms
-screenshot here
+![image](images/images/screenshot_4.PNG)
 These plots show the distributions of each variable
