@@ -55,7 +55,8 @@ Finally, I checked for missing values in the dataset to ensure data integrity an
 ```
 df.isna().sum().sort_values(ascending=False)
 ```
-![Image](images/images/screenshot 1.PNG)
+![image](images/images/screenshot 1.PNG) 
+
 There were no missing values in the DataFrame.
 
 ### Feature Selection
