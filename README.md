@@ -1,15 +1,12 @@
 # Can K-Means clustering be utilized to group Spotify songs based on the audio features valence and tempo?
 ![image](images/images/Spotify_Logo.png)
 ## Table of Contents
-1. [Problem Statement](https://github.com/lcar-dsport/clustering_spotify_songs/blob/main/README.md#problem-statement)
-2. [The Dataset](https://github.com/lcar-dsport/clustering_spotify_songs/blob/main/README.md#the-dataset)
-3. [Executive Summary](https://github.com/lcar-dsport/clustering_spotify_songs/blob/main/README.md#executive-summary)
-4. [Data Preprocessing](https://github.com/lcar-dsport/clustering_spotify_songs/blob/main/README.md#data-preprocessing)
+1. [The Dataset](https://github.com/lcar-dsport/clustering_spotify_songs/blob/main/README.md#the-dataset)
+2. [Executive Summary](https://github.com/lcar-dsport/clustering_spotify_songs/blob/main/README.md#executive-summary)
+3. [Data Preprocessing](https://github.com/lcar-dsport/clustering_spotify_songs/blob/main/README.md#data-preprocessing)
+4. [Data Exploration](
 
-## Problem Statement
-The goal of this project is to group Spotify songs into clusters based on the audio features tempo and valence using K-Means clustering. An algorithm such as this could be used to create a song recommendation system for Spotify users by recommending songs within the same cluster. 
-
-## The Dataset
+## 1. The Dataset
 This dataset was obtained from Kaggle at: [Kaggle](https://www.kaggle.com/datasets/joebeachcapital/30000-spotify-songs/data). 
 The dataset contains the following columns:
 - `TRACK_ID`: Song ID
@@ -36,33 +33,48 @@ The dataset contains the following columns:
 - `TEMPO`: The tempo of a track in beats per minute (BPM).
 - `DURATION_MS`: Duration of a song in milliseconds.
 
-
-## Executive Summary
+## 2. Executive Summary
 This project aimed to investigate whether K-Means clustering can be used to group Spotify songs based on the audio features valence and tempo. This project offers a potential starting point for the development of a future song recommendation system for Spotify users. Due to time constraints and cost/run-time restrictions faced in this project, only two audio features were included in the analysis. Future projects with fewer restrictions should explore whether K-Means clustering can be used to group songs based on all the available audio features for the best and most accurate results.
 
-## Data Preprocessing
+## 3. Data Preprocessing
 ### Loading the Data
-The file was extracted from Kaggle and loaded into our data warehouse, Exasol. I then connected to the table in Exasol using Jupyter notebooks. 
+The file was extracted from Kaggle and loaded into our data warehouse, Exasol. I then connected to the table in Exasol using a connection function in Jupyter Notebooks.
+
+Once the data was loaded into a DataFrame, I conducted an initial visual inspection using the `df.head()` function. This gave me an idea of which columns I wanted to explore further and analyse.
 
 ### Data cleansing
-As I was not interested in the playlist data, I dropped any playlist columns.
+As I was not interested in playlist data, I dropped any playlist columns.
 ```
 df = df.drop(columns = ['PLAYLIST_NAME','PLAYLIST_ID','PLAYLIST_GENRE','PLAYLIST_SUBGENRE']).copy()
 ```
-I then dropped any duplicate values.
+I knew that some songs may occur in more than one playlist, meaning that the same song could appear multiple times in this dataset. Therefore, I also dropped any duplicate songs.
 ```
 df = df.drop_duplicates().copy()
 ```
-
+Finally, I checked for missing values in the dataset to ensure data integrity and accuracy. 
 ```
-# data cleansing and transformation
-# check for null values
 df.isna().sum().sort_values(ascending=False)
-# no null values so no cleansing needed yet
-
-# check for duplicate rows 
-df.duplicated().any()
-# no duplicate rows
 ```
+screenshot here
+There were no missing values in the DataFrame.
+
 ### Feature Selection
-The relevant columns for the clustering algorithm were selected and all other columns were dropped. This was then imported into a new dataframe, `spotify_songs`. 
+I created a new DataFrame, `features`, containing only numeric variables that could be used in the K-Means algorithm to allow for easy exploration. This exploration would allow me to see which variables are most suitable to include in my analysis.
+```
+features = df[['TRACK_POPULARITY','KEY','LOUDNESS','SPEECHINESS','ACOUSTICNESS','INSTRUMENTALNESS','LIVENESS','VALENCE','TEMPO','DURATION_MS']].copy()
+```
+
+## 4. Data Exploration
+I conducted Exploratory Data Analysis on the `features` DataFrame to explore these variables in depth. Using the `describe()` function, I got some descriptive statistics.
+
+screenshot here
+
+This shows some important values such as the number of rows in the DataFrame, the average of each variable, and the standard deviation. To explore the variables further I created box plots and histograms for each variable.
+
+### Box Plots
+screenshot here
+These plots show that some variables, such as `SPEECHINESS` and `INSTRUMENTALNESS`, have a large amount of outliers. Meanwhile, variables such as `LOUDNESS` and `ACOUSTICNESS`, are not normally distributed. 
+
+### Histograms
+screenshot here
+These plots show the distributions of each variable
