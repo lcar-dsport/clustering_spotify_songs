@@ -88,11 +88,11 @@ These plots show the distributions of each variable. Some variables, such as `VA
 
 ### Heat map
 I created a heat map to explore the relationships between the features.
-![image]()
+![image](images/images/screenshot_5.PNG)
 It can be seen that the features `ACOUSTICNESS` and `LOUDNESS` have the strongest relationship, though it is still a fairly weak correlation. I investigated some relationships further using scatterplots.
 
 ### Scatterplots
-![image]()
+![image](images/images/screenshot_11.PNG)
 It is hard to visualise any relationships between these variables due to the number of data points. It is also difficult to see if there are any visual clusters or groups within the data. 
 
 After exploring the dataset, it is obvious that the data must be greatly reduced for this project. The cost and run time for a clustering algorithm using this number of features and data points would be too high. As k-means clustering is sensitive to outliers, I will choose two variables with no/few outliers and ensure to remove any outliers that are present. I will also choose variables with a fairly normal distribution, though this won't matter too much as I will normalise the data.
@@ -108,7 +108,7 @@ new_features = reduced_dataset[['TRACK_ID','TRACK_NAME','TRACK_ARTIST','VALENCE'
 new_features = pd.DataFrame(new_features)
 new_features.head()
 ```
-![image]()
+![image](images/images/screenshot_9.PNG)
 Finally, I removed any outliers using the IQR method. 
 ```
 # remove outliers
@@ -124,7 +124,7 @@ no_outliers.describe().round(2)
 new_features = no_outliers
 ```
 I then created another scatterplot to examine the relationship between these variables after reducing the dataset.
-![image]()
+![image](images/images/screenshot_10.PNG)
 It is difficult to see any obvious clusters, but the relationship between the variables is much clearer now that the data has been reduced. 
 
 ## 6. Normalizing the Data
@@ -152,33 +152,33 @@ To evaluate the clusters, I looked at the number of data points in each of the 1
 ```
 pd.Series(km.labels_).value_counts().sort_index()
 ```
-![image]()
+![image](images/images/screenshot_12.PNG)
 It is clear that some clusters contain more data points than others, indicating that 10 might not be the ideal value for k.
 
 ### Visually Inspecting the Clusters
 I then visually inspected the clusters to see if I could spot any issues. Firstly, I inspected the cluster centre coordinates. As the data has been scaled, the mean for both features is 0. This gives me an idea of where each cluster might be plotted on a graph. 
-![image]()
+![image](images/images/screenshot_13.PNG)
 
 To see which songs appeared in each cluster, I added the cluster labels to the `new_features` DataFrame.
 ```
 data_scaled["Cluster"] = km.labels_
 ```
-![image]()
+![image](images/images/screenshot_14.PNG)
 This allows me to identify any patterns between each cluster, and the type of song that might be present in each cluster. 
 
 I then plotted the clusters on a scatterplot.
-![image]()
+![image](images/images/screenshot_15.PNG)
 Earlier inspection suggested that some clusters appeared to be bigger than others, suggesting that these clusters might need evaluating. However, upon closer inspection, these clusters do not appear to be too unusual. Though some clusters do contain more data points than others, they all remain a similar size. As the ideal value for k is still unclear, I will further evaluate the number of clusters using the elbow method and the silhouette score. 
 
 ## 9. Evaluating the Number of Clusters
 ### The Elbow Method
 In an attempt to find the ideal value for k, I used the elbow method.
-![image]()
+![image](images/images/screenshot_16.PNG)
 As there is not a clear 'elbow' in the graph, it is not entirely clear from this method alone what the ideal number of clusters is. Though, I would assume that it would be anywhere from 10 onwards. 
 
 ### Silhouette Score
 I also calculated the average silhouette score to find the ideal value for k.
-![image]()
+![image](images/images/screenshot_17.PNG)
 Though there are several peaks, 20 appears to be the highest and therefore most ideal number of clusters. The elbow method also suggested that the ideal number of clusters could be anywhere from 10 onwards, so I will choose 20 as the ideal value for k. 
 
 ## 10. Results
@@ -192,6 +192,6 @@ I then added the cluster labels to the DataFrame to see which songs were in whic
 data_scaled["Cluster"] = km.labels_
 data_scaled.head(50)
 ```
-![image]()
+![image](images/images/screenshot_18.PNG)
 Finally, I plotted the clusters on a new chart.
-![image]()
+![image](images/images/screenshot_19.PNG)
