@@ -6,11 +6,11 @@
 3. [Data Preprocessing](https://github.com/lcar-dsport/clustering_spotify_songs/blob/main/README.md#data-preprocessing)
 4. [Data Exploration](https://github.com/lcar-dsport/clustering_spotify_songs/blob/main/README.md#4-data-exploration)
 5. [Reducing the Dataset](https://github.com/lcar-dsport/clustering_spotify_songs/blob/main/README.md#5-reducing-the-dataset)
-6. [Normalizing the Data]()
-7. [Creating the Initial Clusters]()
-8. [Evaluating and Visualising the Clusters]()
-9. [Evaluating the Number of Clusters]()
-10. [Results]()
+6. [Normalizing the Data](https://github.com/lcar-dsport/clustering_spotify_songs/blob/main/README.md#6-normalizing-the-data)
+7. [Creating the Initial Clusters](https://github.com/lcar-dsport/clustering_spotify_songs/blob/main/README.md#7-creating-the-initial-clusters)
+8. [Evaluating and Visualising the Clusters](https://github.com/lcar-dsport/clustering_spotify_songs/blob/main/README.md#8-evaluating-and-visualising-the-clusters)
+9. [Evaluating the Number of Clusters](https://github.com/lcar-dsport/clustering_spotify_songs/blob/main/README.md#9-evaluating-the-number-of-clusters)
+10. [Results](https://github.com/lcar-dsport/clustering_spotify_songs/blob/main/README.md#10-results)
 
 ## 1. The Dataset
 This dataset was obtained from Kaggle at: [Kaggle](https://www.kaggle.com/datasets/joebeachcapital/30000-spotify-songs/data). 
