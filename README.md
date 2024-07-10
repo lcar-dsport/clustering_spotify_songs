@@ -5,9 +5,12 @@
 2. [Executive Summary](https://github.com/lcar-dsport/clustering_spotify_songs/blob/main/README.md#executive-summary)
 3. [Data Preprocessing](https://github.com/lcar-dsport/clustering_spotify_songs/blob/main/README.md#data-preprocessing)
 4. [Data Exploration](https://github.com/lcar-dsport/clustering_spotify_songs/blob/main/README.md#4-data-exploration)
-5. [Reducing the Dataset]()
+5. [Reducing the Dataset](https://github.com/lcar-dsport/clustering_spotify_songs/blob/main/README.md#5-reducing-the-dataset)
 6. [Normalizing the Data]()
-7. 
+7. [Creating the Initial Clusters]()
+8. [Evaluating and Visualising the Clusters]()
+9. [Evaluating the Number of Clusters]()
+10. [Results]()
 
 ## 1. The Dataset
 This dataset was obtained from Kaggle at: [Kaggle](https://www.kaggle.com/datasets/joebeachcapital/30000-spotify-songs/data). 
