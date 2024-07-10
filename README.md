@@ -5,6 +5,9 @@
 2. [Executive Summary](https://github.com/lcar-dsport/clustering_spotify_songs/blob/main/README.md#executive-summary)
 3. [Data Preprocessing](https://github.com/lcar-dsport/clustering_spotify_songs/blob/main/README.md#data-preprocessing)
 4. [Data Exploration](https://github.com/lcar-dsport/clustering_spotify_songs/blob/main/README.md#4-data-exploration)
+5. [Reducing the Dataset]()
+6. [Normalizing the Data]()
+7. 
 
 ## 1. The Dataset
 This dataset was obtained from Kaggle at: [Kaggle](https://www.kaggle.com/datasets/joebeachcapital/30000-spotify-songs/data). 
@@ -42,7 +45,7 @@ The file was extracted from Kaggle and loaded into our data warehouse, Exasol. I
 
 Once the data was loaded into a DataFrame, I conducted an initial visual inspection using the `df.head()` function. This gave me an idea of which columns I wanted to explore further and analyse.
 
-### Data cleansing
+### Data Cleansing
 As I was not interested in playlist data, I dropped any playlist columns.
 ```
 df = df.drop(columns = ['PLAYLIST_NAME','PLAYLIST_ID','PLAYLIST_GENRE','PLAYLIST_SUBGENRE']).copy()
@@ -78,4 +81,114 @@ These plots show that some variables, such as `SPEECHINESS` and `INSTRUMENTALNES
 
 ### Histograms
 ![image](images/images/screenshot_4.PNG)
-These plots show the distributions of each variable
+These plots show the distributions of each variable. Some variables, such as `VALENCE` have a normal distribution.
+
+### Heat map
+I created a heat map to explore the relationships between the features.
+![image]()
+It can be seen that the features `ACOUSTICNESS` and `LOUDNESS` have the strongest relationship, though it is still a fairly weak correlation. I investigated some relationships further using scatterplots.
+
+### Scatterplots
+![image]()
+It is hard to visualise any relationships between these variables due to the number of data points. It is also difficult to see if there are any visual clusters or groups within the data. 
+
+After exploring the dataset, it is obvious that the data must be greatly reduced for this project. The cost and run time for a clustering algorithm using this number of features and data points would be too high. As k-means clustering is sensitive to outliers, I will choose two variables with no/few outliers and ensure to remove any outliers that are present. I will also choose variables with a fairly normal distribution, though this won't matter too much as I will normalise the data.
+
+## 5. Reducing the Dataset
+I reduced the dataset down to 1000 rows ordered by `TRACK_POPULARITY` descending. I did this for the purpose of this project to ensure that there was a faster run time. 
+```
+reduced_dataset = df.sort_values(by=['TRACK_POPULARITY'], ascending=False).head(1000)
+```
+I then selected my two features for the k-means algorithm, along with other relevant song information.
+```
+new_features = reduced_dataset[['TRACK_ID','TRACK_NAME','TRACK_ARTIST','VALENCE','TEMPO']]
+new_features = pd.DataFrame(new_features)
+new_features.head()
+```
+![image]()
+Finally, I removed any outliers using the IQR method. 
+```
+# remove outliers
+Q1 = new_features['TEMPO'].quantile(0.25)
+Q3 = new_features['TEMPO'].quantile(0.75)
+IQR = Q3 - Q1
+# Define the lower and upper bound
+lower_bound = Q1 - 1.5 * IQR
+upper_bound = Q3 + 1.5 * IQR
+# Filter out the outliers
+no_outliers = new_features[(new_features['TEMPO'] >= lower_bound) & (new_features['TEMPO'] <= upper_bound)].copy()
+no_outliers.describe().round(2)
+new_features = no_outliers
+```
+I then created another scatterplot to examine the relationship between these variables after reducing the dataset.
+![image]()
+It is difficult to see any obvious clusters, but the relationship between the variables is much clearer now that the data has been reduced. 
+
+## 6. Normalizing the Data
+I normalized the dataset using the z-score method. 
+```
+from sklearn.preprocessing import StandardScaler 
+scaler = StandardScaler()
+data_scaled = scaler.fit_transform(new_features[['VALENCE','TEMPO']].copy())
+data_scaled = pd.DataFrame(data_scaled, columns = ['VALENCE','TEMPO'])
+data_scaled = pd.concat([data_scaled.copy(), new_features[['TRACK_ID','TRACK_NAME','TRACK_ARTIST']].copy().reset_index(drop=True)], axis=1)
+data_scaled.head()
+```
+
+## 7. Creating the Initial Clusters
+I initially fit the k-means algorithm to the dataset using a k of 10. This number was chosen randomly so I will evaluate the clusters to determine whether this number is appropriate.
+```
+from sklearn.cluster import KMeans 
+km = KMeans(n_clusters = 10, n_init = 50, random_state = 123)
+km.fit(data_scaled[["VALENCE", "TEMPO"]])
+```
+I then looked at the inertia value, using `km.inertia_`, to give me an idea of whether 10 is an appropriate k value. The inertia value was 230.5, which is quite far from 0. Therefore, I must evaluate the clusters to determine the most appropriate value for k. 
+
+## 8. Evaluating and Visualising the Clusters 
+To evaluate the clusters, I looked at the number of data points in each of the 10 clusters as k-means requires clusters to be of similar sizes. 
+```
+pd.Series(km.labels_).value_counts().sort_index()
+```
+![image]()
+It is clear that some clusters contain more data points than others, indicating that 10 might not be the ideal value for k.
+
+### Visually Inspecting the Clusters
+I then visually inspected the clusters to see if I could spot any issues. Firstly, I inspected the cluster centre coordinates. As the data has been scaled, the mean for both features is 0. This gives me an idea of where each cluster might be plotted on a graph. 
+![image]()
+
+To see which songs appeared in each cluster, I added the cluster labels to the `new_features` DataFrame.
+```
+data_scaled["Cluster"] = km.labels_
+```
+![image]()
+This allows me to identify any patterns between each cluster, and the type of song that might be present in each cluster. 
+
+I then plotted the clusters on a scatterplot.
+![image]()
+Earlier inspection suggested that some clusters appeared to be bigger than others, suggesting that these clusters might need evaluating. However, upon closer inspection, these clusters do not appear to be too unusual. Though some clusters do contain more data points than others, they all remain a similar size. As the ideal value for k is still unclear, I will further evaluate the number of clusters using the elbow method and the silhouette score. 
+
+## 9. Evaluating the Number of Clusters
+### The Elbow Method
+In an attempt to find the ideal value for k, I used the elbow method.
+![image]()
+As there is not a clear 'elbow' in the graph, it is not entirely clear from this method alone what the ideal number of clusters is. Though, I would assume that it would be anywhere from 10 onwards. 
+
+### Silhouette Score
+I also calculated the average silhouette score to find the ideal value for k.
+![image]()
+Though there are several peaks, 20 appears to be the highest and therefore most ideal number of clusters. The elbow method also suggested that the ideal number of clusters could be anywhere from 10 onwards, so I will choose 20 as the ideal value for k. 
+
+## 10. Results
+Finally, I re-fit the k-means algorithm to the dataset using the new k value of 20. 
+```
+km = KMeans(n_clusters = 20, n_init = 50, random_state = 123)
+km.fit(data_scaled[["VALENCE", "TEMPO"]].copy())
+```
+I then added the cluster labels to the DataFrame to see which songs were in which cluster.
+```
+data_scaled["Cluster"] = km.labels_
+data_scaled.head(50)
+```
+![image]()
+Finally, I plotted the clusters on a new chart.
+![image]()
