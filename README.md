@@ -1,5 +1,5 @@
 # Can machine learning be used to group Spotify songs based on the audio features valence and tempo?
-![image](images/images/Spotify_Logo.png)
+
 ## Table of Contents
 1. [The Dataset](https://github.com/lcar-dsport/clustering_spotify_songs/blob/main/README.md#the-dataset)
 2. [Executive Summary](https://github.com/lcar-dsport/clustering_spotify_songs/blob/main/README.md#executive-summary)
