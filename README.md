@@ -11,6 +11,7 @@
 8. [Evaluating and Visualising the Clusters](https://github.com/lcar-dsport/clustering_spotify_songs/blob/main/README.md#8-evaluating-and-visualising-the-clusters)
 9. [Evaluating the Number of Clusters](https://github.com/lcar-dsport/clustering_spotify_songs/blob/main/README.md#9-evaluating-the-number-of-clusters)
 10. [Results](https://github.com/lcar-dsport/clustering_spotify_songs/blob/main/README.md#10-results)
+11. [Future Recommendations]
 
 ## 1. The Dataset
 This dataset was obtained from Kaggle at: [Kaggle](https://www.kaggle.com/datasets/joebeachcapital/30000-spotify-songs/data). 
@@ -237,3 +238,9 @@ data_scaled.head(50)
 Finally, I plotted the clusters on a new chart.
 
 ![image](images/images/screenshot_19.PNG)
+
+## 11. Future Recommendations
+Though it appears that the algorithm has accurately clustered the songs based on the features valence and tempo, several improvements must be made before it is ready to contribute to a song recommendation system:
+- An appropriate dimensionality reduction technique must be used to reduce the dimensionality of this dataset so that a larger number of features can be included.
+- A more appropriate method should be used to remove outliers, such as using standard deviations.
+- Future projects could explore the song genres present in each cluster. This could be included in a song recommendation system to introduce listeners to new genres.
