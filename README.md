@@ -1,4 +1,4 @@
-# Can K-Means clustering be utilized to group Spotify songs based on the audio features valence and tempo?
+# Can machine learning be used to group Spotify songs based on the audio features valence and tempo?
 ![image](images/images/Spotify_Logo.png)
 ## Table of Contents
 1. [The Dataset](https://github.com/lcar-dsport/clustering_spotify_songs/blob/main/README.md#the-dataset)
@@ -40,7 +40,7 @@ The dataset contains the following columns:
 - `DURATION_MS`: Duration of a song in milliseconds.
 
 ## 2. Executive Summary
-This project aimed to investigate whether K-Means clustering can be used to group Spotify songs based on the audio features valence and tempo. This project offers a potential starting point for the development of a future song recommendation system for Spotify users. Due to time constraints and cost/run-time restrictions faced in this project, only two audio features were included in the analysis. Future projects with fewer restrictions should explore whether K-Means clustering can be used to group songs based on all the available audio features for the best and most accurate results.
+Current song recommendation systems are highly personalised to each individual listener. Whilst this approach works, it does not consider any changes in an individual’s music taste as it relies heavily on previous habits. Therefore, an algorithm that accurately recommends songs with similar characteristics without relying too much on previous habits may be more appropriate. This project aimed to investigate whether machine learning can be used to group Spotify songs based on a number of audio features alone without considering listening habits. However, due to time notebook run-time restrictions faced in this project, only two audio features were included in the analysis: valence and tempo. K-means clustering was chosen as the most appropriate machine learning method for this project due to its speed and simplicity when grouping data. Cluster validation techniques revealed that the ideal number of clusters is 20 (k = 20) based on the features chosen and the number of data points. Future iterations should improve on this project by choosing a suitable technique to reduce dimensionality of the dataset and ensure effective outlier removal. Should these improvements be met, an algorithm such as this could be used to develop an audio feature-based song recommendation system.
 
 ## 3. Data Preprocessing
 ### Loading the Data
@@ -84,7 +84,7 @@ I conducted Exploratory Data Analysis on the `features` DataFrame to explore the
 
 This shows some important values such as the number of rows in the DataFrame, the average of each variable, and the standard deviation. To explore the variables further I created box plots and histograms for each variable.
 
-### Box Plots
+### Box and Whisker Plots
 ![image](images/images/screenshot_3.PNG)
 
 These plots show that some variables, such as `SPEECHINESS` and `INSTRUMENTALNESS`, have a large amount of outliers. Meanwhile, variables such as `LOUDNESS` and `ACOUSTICNESS`, are not normally distributed. 
