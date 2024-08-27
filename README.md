@@ -11,7 +11,7 @@
 8. [Evaluating and Visualising the Clusters](https://github.com/lcar-dsport/clustering_spotify_songs/blob/main/README.md#8-evaluating-and-visualising-the-clusters)
 9. [Evaluating the Number of Clusters](https://github.com/lcar-dsport/clustering_spotify_songs/blob/main/README.md#9-evaluating-the-number-of-clusters)
 10. [Results](https://github.com/lcar-dsport/clustering_spotify_songs/blob/main/README.md#10-results)
-11. [Future Recommendations]
+11. [Future Recommendations](https://github.com/lcar-dsport/clustering_spotify_songs/blob/main/README.md#11-future-recommendations)
 
 ## 1. The Dataset
 This dataset was obtained from Kaggle at: [Kaggle](https://www.kaggle.com/datasets/joebeachcapital/30000-spotify-songs/data). 
